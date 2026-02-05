@@ -42,6 +42,8 @@ The core of the design relies on the **Handshake Rule**: data is only sampled on
 
 The provided testbench (`pipereg_tb.v`) simulates a real-world environment where the producer is slightly slower than the consumer to ensure stability.
 
+![alt text](https://github.com/afzalahmed786/Single_Pipeline_Reg/blob/main/output_waveform)
+
 ### **Simulation Scenarios**
 
 1. **Ideal Stream:** Data is updated every **2 clock cycles**, providing stable timing and proving the module correctly samples sequential patterns ().
