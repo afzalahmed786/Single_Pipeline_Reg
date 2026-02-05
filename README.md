@@ -12,7 +12,6 @@ This project implements a single-stage buffer that facilitates communication bet
 
 * **8-Bit Data Path:** Optimized for standard byte-wide data transfers.
 * **Full Handshake Protocol:** Uses `valid` and `ready` signals to synchronize data movement.
-* **Zero-Latency Backpressure:** The `w_ready` signal is calculated combinationally (), allowing for instant stalling.
 * **Data Integrity:** Verified to prevent overwrites or dropped packets, even when the consumer stalls the output.
 
 ---
@@ -43,11 +42,6 @@ The core of the design relies on the **Handshake Rule**: data is only sampled on
 The provided testbench (`pipereg_tb.v`) simulates a real-world environment where the producer is slightly slower than the consumer to ensure stability.
 
 ![alt text](https://github.com/afzalahmed786/Single_Pipeline_Reg/blob/main/output_waveform)
-
-### **Simulation Scenarios**
-
-1. **Ideal Stream:** Data is updated every **2 clock cycles**, providing stable timing and proving the module correctly samples sequential patterns ().
-2. **Backpressure Stall:** The `r_ready` signal is pulled low while data is in flight to verify that the internal register holds the value and correctly de-asserts `w_ready` to stop the producer.
 
 ---
 
