@@ -4,10 +4,10 @@ module pipereg_tb();
 
     reg clock, rst;
     reg w_valid, r_ready;
-    reg [7:0] w_data;       // 8-bit data width
+    reg [7:0] w_data;       
     
     wire w_ready, r_valid;
-    wire [7:0] r_data;      // 8-bit data width
+    wire [7:0] r_data;      
 
     pipereg dut (
         .clock   (clock),
@@ -41,11 +41,11 @@ module pipereg_tb();
         $display("Scenario 1: Sending 10 words sequentially...");
         for (i = 1; i <= 10; i = i + 1) begin
             w_valid = 1;
-            w_data = i; // Patterns: 01, 02, 03...
+            w_data = i; 
             
             while (!w_ready) @(posedge clock); 
 
-            @(posedge clock); // Handshake occurs here
+            @(posedge clock); 
 	    repeat(2) @(posedge clock);
         end
         w_valid = 0; 
@@ -53,8 +53,8 @@ module pipereg_tb();
 
         $display("Scenario 2: Testing Backpressure Stall...");
         w_valid = 1;
-        w_data = 8'hAA; // Value to be "trapped"
-        r_ready = 0;    // Downstream stops
+        w_data = 8'hAA; 
+        r_ready = 0;    
         @(posedge clock);
         
         w_data = 8'hFF; 
