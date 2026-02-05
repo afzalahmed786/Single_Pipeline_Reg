@@ -26,7 +26,6 @@ module pipereg_tb();
     integer i;
 
     initial begin
-        $display("Starting Simulation...");
         $dumpfile("dump.vcd");
         $dumpvars(0, pipereg_tb);
 
@@ -38,7 +37,6 @@ module pipereg_tb();
         #20 rst = 0; // Release reset
         @(posedge clock);
 
-        $display("Scenario 1: Sending 10 words sequentially...");
         for (i = 1; i <= 10; i = i + 1) begin
             w_valid = 1;
             w_data = i; 
@@ -51,7 +49,6 @@ module pipereg_tb();
         w_valid = 0; 
         repeat(2) @(posedge clock);
 
-        $display("Scenario 2: Testing Backpressure Stall...");
         w_valid = 1;
         w_data = 8'hAA; 
         r_ready = 0;    
@@ -60,7 +57,6 @@ module pipereg_tb();
         w_data = 8'hFF; 
         repeat(5) @(posedge clock);
         
-        $display("Releasing stall. AA should be read before FF.");
         r_ready = 1; 
         @(posedge clock);
         w_valid = 0;
